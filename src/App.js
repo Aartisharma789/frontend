@@ -71,7 +71,7 @@ function App() {
 		});
 	}, [pathname])
 
-	axios.defaults.baseURL = 'https://backend-e-commerce-7t60.onrender.com';
+	// axios.defaults.baseURL = 'https://backend-e-commerce-7t60.onrender.com';
 
 	// disable right click
 	window.addEventListener("contextmenu", (e) => e.preventDefault());

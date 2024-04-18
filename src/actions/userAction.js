@@ -56,6 +56,8 @@ export const loginUser = (email, password) => async (dispatch) => {
 			config
 		);
 
+		axios.defaults.headers["Authorization"] = data.token;
+
 		dispatch({
 			type: LOGIN_USER_SUCCESS,
 			payload: data.user,

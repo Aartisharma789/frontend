@@ -57,17 +57,16 @@ export const loginUser = (email, password) => async (dispatch) => {
 			config
 		);
 
-		axios.defaults.headers["Authorization"] = data.token;
+		axios.defaults.headers["token"] = data.token;
+		const token = data.token;
 
+		Cookies.set('token', token);
+		console.log('Added Token To The Cookies');
+		
 		dispatch({
 			type: LOGIN_USER_SUCCESS,
 			payload: data.user,
 		});
-		console.log(data)
-		const token = data.token;
-
-		Cookies.set('token', token);
-		console.log('Added Token To The Cookies')
 
 	} catch (error) {
 		dispatch({
@@ -95,15 +94,15 @@ export const registerUser = (userData) => async (dispatch) => {
 			config
 		);
 
-		dispatch({
-			type: REGISTER_USER_SUCCESS,
-			payload: data.user,
-		});
-		console.log(data)
 		const token = data.token;
 
 		Cookies.set('token', token);
 		console.log('Added Token To The Cookies')
+
+		dispatch({
+			type: REGISTER_USER_SUCCESS,
+			payload: data.user,
+		});
 
 	} catch (error) {
 		dispatch({

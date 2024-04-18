@@ -62,6 +62,7 @@ export const loginUser = (email, password) => async (dispatch) => {
 			type: LOGIN_USER_SUCCESS,
 			payload: data.user,
 		});
+		console.log(data)
 
 	} catch (error) {
 		dispatch({
@@ -93,6 +94,7 @@ export const registerUser = (userData) => async (dispatch) => {
 			type: REGISTER_USER_SUCCESS,
 			payload: data.user,
 		});
+		console.log(data)
 
 	} catch (error) {
 		dispatch({

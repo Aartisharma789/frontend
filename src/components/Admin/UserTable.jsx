@@ -122,7 +122,7 @@ const UserTable = () => {
 		},
 	];
 
-	const rows = [];
+  const rows = [];
 
 	users &&
 		users.forEach((item) => {
@@ -141,7 +141,7 @@ const UserTable = () => {
 		<>
 			<MetaData title='Admin Users | Flipkart' />
 
-			{loading && <BackdropLoader />}
+      {loading && <BackdropLoader />}
 
 			<h1 className='text-lg font-medium uppercase'>users</h1>
 			<div
@@ -164,3 +164,4 @@ const UserTable = () => {
 };
 
 export default UserTable;
+

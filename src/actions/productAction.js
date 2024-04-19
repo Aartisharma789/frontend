@@ -176,8 +176,12 @@ export const createProduct = (productData) => async (dispatch) => {
 	try {
 		dispatch({ type: NEW_PRODUCT_REQUEST });
 		const token = localStorage.getItem('token');
-		const config = { header: { "Content-Type": "application/json", 'Authorization': `${token}`, } }
-		const { data } = await axios.post("/api/v1/admin/product/new", productData, config);
+		// const config = { header: { "Content-Type": "application/json", 'Authorization': `${token}` } }
+		const { data } = await axios.post("/api/v1/admin/product/new", productData, {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: NEW_PRODUCT_SUCCESS,

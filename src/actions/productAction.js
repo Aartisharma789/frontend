@@ -106,8 +106,12 @@ export const newReview = (reviewData) => async (dispatch) => {
 	try {
 		dispatch({ type: NEW_REVIEW_REQUEST });
 		const token = localStorage.getItem('token');
-		const config = { header: { "Content-Type": "application/json", 'Authorization': `${token}`, } }
-		const { data } = await axios.put("/api/v1/review", reviewData, config);
+		// const config = { header: { "Content-Type": "application/json", 'Authorization': `${token}`, } }
+		const { data } = await axios.put("/api/v1/review", reviewData, {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: NEW_REVIEW_SUCCESS,
@@ -200,8 +204,12 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 	try {
 		dispatch({ type: UPDATE_PRODUCT_REQUEST });
 		const token = localStorage.getItem('token');
-		const config = { header: { "Content-Type": "application/json", 'Authorization': `${token}`, } }
-		const { data } = await axios.put(`/api/v1/admin/product/${id}`, productData, config);
+		// const config = { header: { "Content-Type": "application/json", 'Authorization': `${token}`, } }
+		const { data } = await axios.put(`/api/v1/admin/product/${id}`, productData, {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: UPDATE_PRODUCT_SUCCESS,

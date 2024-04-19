@@ -61,7 +61,8 @@ export const loginUser = (email, password) => async (dispatch) => {
 		const token = data.token;
 
 		Cookies.set('token', token);
-		console.log('Added Token To The Cookies');
+		localStorage.setItem('token', token);
+		console.log('Added Token To The Cookies And LocalStorage');
 		
 		dispatch({
 			type: LOGIN_USER_SUCCESS,
@@ -97,7 +98,9 @@ export const registerUser = (userData) => async (dispatch) => {
 		const token = data.token;
 
 		Cookies.set('token', token);
-		console.log('Added Token To The Cookies')
+		localStorage.setItem('token', token);
+		console.log('Added Token To The Cookies And LocalStorage');
+		
 
 		dispatch({
 			type: REGISTER_USER_SUCCESS,
@@ -117,7 +120,14 @@ export const loadUser = () => async (dispatch) => {
 	try {
 		dispatch({ type: LOAD_USER_REQUEST });
 
-		const { data } = await axios.get('/api/v1/me');
+		const token = localStorage.getItem('token');
+		console.log(token);
+
+		const { data } = await axios.get('/api/v1/me', {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: LOAD_USER_SUCCESS,

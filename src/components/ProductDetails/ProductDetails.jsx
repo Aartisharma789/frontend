@@ -129,7 +129,7 @@ const ProductDetails = () => {
 		<>
 			{loading ? <Loader /> : (
 				<>
-					<MetaData title={product && product.name} />
+					<MetaData title={product.name} />
 					<MinCategory />
 					<main className="mt-12 sm:mt-0">
 

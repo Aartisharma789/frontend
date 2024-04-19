@@ -108,7 +108,6 @@ export const newReview = (reviewData) => async (dispatch) => {
 			
 			const token = localStorage.getItem('token');
 			
-			// Check if token is available
 			if (!token) {
 					throw new Error('Token not found');
 			}
@@ -189,7 +188,6 @@ export const createProduct = (productData) => async (dispatch) => {
 	try {
 		dispatch({ type: NEW_PRODUCT_REQUEST });
 		const token = localStorage.getItem('token');
-		// const config = { header: { "Content-Type": "application/json", 'Authorization': `${token}` } }
 		const { data } = await axios.post("/api/v1/admin/product/new", productData, {
 			headers: {
 					'Authorization': `${token}`,
@@ -213,7 +211,6 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 	try {
 		dispatch({ type: UPDATE_PRODUCT_REQUEST });
 		const token = localStorage.getItem('token');
-		// const config = { header: { "Content-Type": "application/json", 'Authorization': `${token}`, } }
 		const { data } = await axios.put(`/api/v1/admin/product/${id}`, productData, {
 			headers: {
 					'Authorization': `${token}`,

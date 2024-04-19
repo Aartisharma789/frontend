@@ -104,26 +104,35 @@ export const getProductDetails = (id) => async (dispatch) => {
 // New/Update Review
 export const newReview = (reviewData) => async (dispatch) => {
 	try {
-		dispatch({ type: NEW_REVIEW_REQUEST });
-		const token = localStorage.getItem('token');
-		// const config = { header: { "Content-Type": "application/json", 'Authorization': `${token}`, } }
-		const { data } = await axios.put("/api/v1/review", reviewData, {
-			headers: {
-					'Authorization': `${token}`,
-			},
-	});
+			dispatch({ type: NEW_REVIEW_REQUEST });
+			
+			const token = localStorage.getItem('token');
+			
+			// Check if token is available
+			if (!token) {
+					throw new Error('Token not found');
+			}
+			
+			const config = {
+					headers: {
+							'Content-Type': 'application/json',
+							'Authorization': `${token}`,
+					},
+			};
 
-		dispatch({
-			type: NEW_REVIEW_SUCCESS,
-			payload: data.success,
-		});
+			const { data } = await axios.put("/api/v1/review", reviewData, config);
+
+			dispatch({
+					type: NEW_REVIEW_SUCCESS,
+					payload: data.success,
+			});
 	} catch (error) {
-		dispatch({
-			type: NEW_REVIEW_FAIL,
-			payload: error.response.data.message,
-		});
+			dispatch({
+					type: NEW_REVIEW_FAIL,
+					payload: error.response ? error.response.data.message : error.message,
+			});
 	}
-}
+};
 
 // Get All Products ---PRODUCT SLIDER
 export const getSliderProducts = () => async (dispatch) => {

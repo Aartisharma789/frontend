@@ -3,7 +3,12 @@ import { ADD_TO_WISHLIST, REMOVE_FROM_WISHLIST } from "../constants/wishlistCons
 
 // Add To Wishlist
 export const addToWishlist = (id) => async (dispatch, getState) => {
-	const { data } = await axios.get(`/api/v1/product/${id}`);
+	const token = localStorage.getItem('token');
+	const { data } = await axios.get(`/api/v1/product/${id}`, {
+		headers: {
+				'Authorization': `${token}`,
+		},
+});
 
 	dispatch({
 		type: ADD_TO_WISHLIST,

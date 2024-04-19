@@ -3,7 +3,13 @@ import { ADD_TO_CART, EMPTY_CART, REMOVE_FROM_CART, SAVE_SHIPPING_INFO } from ".
 
 // add to cart
 export const addItemsToCart = (id, quantity = 1) => async (dispatch, getState) => {
-	const { data } = await axios.get(`/api/v1/product/${id}`);
+
+	const token = localStorage.getItem('token');
+	const { data } = await axios.get(`/api/v1/product/${id}`, {
+		headers: {
+				'Authorization': `${token}`,
+		},
+});
 
 	dispatch({
 		type: ADD_TO_CART,

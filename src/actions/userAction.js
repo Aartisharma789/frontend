@@ -57,8 +57,8 @@ export const loginUser = (email, password) => async (dispatch) => {
 			config
 		);
 
-		axios.defaults.headers["token"] = data.token;
 		const token = data.token;
+		axios.defaults.headers.common["Authorization"] = token;
 
 		Cookies.set('token', token);
 		localStorage.setItem('token', token);
@@ -96,6 +96,7 @@ export const registerUser = (userData) => async (dispatch) => {
 		);
 
 		const token = data.token;
+		axios.defaults.headers.common["Authorization"] = token;
 
 		Cookies.set('token', token);
 		localStorage.setItem('token', token);

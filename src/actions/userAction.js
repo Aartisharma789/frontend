@@ -143,6 +143,7 @@ export const loadUser = () => async (dispatch) => {
 export const logoutUser = () => async (dispatch) => {
 	try {
 		await axios.get('/api/v1/logout');
+		localStorage.removeItem('token');
 		dispatch({ type: LOGOUT_USER_SUCCESS });
 	} catch (error) {
 		dispatch({

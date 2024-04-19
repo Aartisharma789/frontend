@@ -6,14 +6,16 @@ export const newOrder = (order) => async (dispatch) => {
 	try {
 		dispatch({ type: NEW_ORDER_REQUEST });
 
+		const token = localStorage.getItem('token');
+
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
+				'Authorization': `${token}`,
 			},
 		};
 
 		const { data } = await axios.post('/api/v1/order/new', order, config);
-		console.log('order:', order)
 
 		dispatch({
 			type: NEW_ORDER_SUCCESS,
@@ -33,7 +35,13 @@ export const myOrders = () => async (dispatch) => {
 	try {
 		dispatch({ type: MY_ORDERS_REQUEST });
 
-		const { data } = await axios.get('/api/v1/orders/me');
+		const token = localStorage.getItem('token');
+
+		const { data } = await axios.get('/api/v1/orders/me', {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: MY_ORDERS_SUCCESS,
@@ -53,7 +61,13 @@ export const getOrderDetails = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: ORDER_DETAILS_REQUEST });
 
-		const { data } = await axios.get(`/api/v1/order/${id}`);
+		const token = localStorage.getItem('token');
+
+		const { data } = await axios.get(`/api/v1/order/${id}`, {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: ORDER_DETAILS_SUCCESS,
@@ -93,7 +107,13 @@ export const getAllOrders = () => async (dispatch) => {
 	try {
 		dispatch({ type: ALL_ORDERS_REQUEST });
 
-		const { data } = await axios.get('/api/v1/admin/orders');
+		const token = localStorage.getItem('token');
+
+		const { data } = await axios.get('/api/v1/admin/orders', {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: ALL_ORDERS_SUCCESS,
@@ -113,9 +133,12 @@ export const updateOrder = (id, order) => async (dispatch) => {
 	try {
 		dispatch({ type: UPDATE_ORDER_REQUEST });
 
+		const token = localStorage.getItem('token');
+
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
+				'Authorization': `${token}`,
 			},
 		};
 
@@ -139,7 +162,13 @@ export const deleteOrder = (id) => async (dispatch) => {
 	try {
 		dispatch({ type: DELETE_ORDER_REQUEST });
 
-		const { data } = await axios.delete(`/api/v1/admin/order/${id}`);
+		const token = localStorage.getItem('token');
+
+		const { data } = await axios.delete(`/api/v1/admin/order/${id}`, {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: DELETE_ORDER_SUCCESS,

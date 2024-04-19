@@ -284,8 +284,14 @@ export const resetPassword = (token, passwords) => async (dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
 	try {
 
+		const token = localStorage.getItem('token');
+
 		dispatch({ type: ALL_USERS_REQUEST });
-		const { data } = await axios.get('/api/v1/admin/users');
+		const { data } = await axios.get('/api/v1/admin/users', {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 		dispatch({
 			type: ALL_USERS_SUCCESS,
 			payload: data.users,
@@ -303,8 +309,14 @@ export const getAllUsers = () => async (dispatch) => {
 export const getUserDetails = (id) => async (dispatch) => {
 	try {
 
+		const token = localStorage.getItem('token');
+
 		dispatch({ type: USER_DETAILS_REQUEST });
-		const { data } = await axios.get(`/api/v1/admin/user/${id}`);
+		const { data } = await axios.get(`/api/v1/admin/user/${id}`, {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: USER_DETAILS_SUCCESS,
@@ -325,9 +337,12 @@ export const updateUser = (id, userData) => async (dispatch) => {
 
 		dispatch({ type: UPDATE_USER_REQUEST });
 
+		const token = localStorage.getItem('token');
+
 		const config = {
 			headers: {
 				"Content-Type": "application/json",
+				'Authorization': `${token}`,
 			},
 		}
 
@@ -355,7 +370,14 @@ export const deleteUser = (id) => async (dispatch) => {
 	try {
 
 		dispatch({ type: DELETE_USER_REQUEST });
-		const { data } = await axios.delete(`/api/v1/admin/user/${id}`);
+
+		const token = localStorage.getItem('token');
+
+		const { data } = await axios.delete(`/api/v1/admin/user/${id}`, {
+			headers: {
+					'Authorization': `${token}`,
+			},
+	});
 
 		dispatch({
 			type: DELETE_USER_SUCCESS,

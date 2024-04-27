@@ -63,7 +63,6 @@ const NewProduct = () => {
 			);
 			setPrice(amazonProductDetails.price);
 			setCuttedPrice(amazonProductDetails.cuttedPrice);
-			setBrand(amazonProductDetails.brand);
 			setLogo(amazonProductDetails.brandImageUrl);
 			setImages([amazonProductDetails.imageUrl]);
 			setCategory(amazonProductDetails.category);

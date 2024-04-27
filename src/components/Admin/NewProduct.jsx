@@ -55,10 +55,12 @@ const NewProduct = () => {
 
 			const { amazonProductDetails } = responce.data;
 
-			console.log('Image URLs:', amazonProductDetails.imageUrl);
-
 			setName(amazonProductDetails.title);
-			setDescription(Array.isArray(amazonProductDetails.description) ? amazonProductDetails.description.join('\n') : amazonProductDetails.description);
+			setDescription(
+				Array.isArray(amazonProductDetails.description)
+					? amazonProductDetails.description.join('\n')
+					: amazonProductDetails.description
+			);
 			setPrice(amazonProductDetails.price);
 			setCuttedPrice(amazonProductDetails.cuttedPrice);
 			setBrand(amazonProductDetails.brand);
@@ -68,7 +70,9 @@ const NewProduct = () => {
 
 			setImagesPreview([{ url: amazonProductDetails.imageUrl }]);
 
-			enqueueSnackbar('Product details fetched successfully', { variant: 'success' });
+			enqueueSnackbar('Product details fetched successfully', {
+				variant: 'success',
+			});
 		} catch (error) {
 			enqueueSnackbar('Failed to fetch product details', { variant: 'error' });
 			console.error(error);
@@ -76,8 +80,6 @@ const NewProduct = () => {
 			setFetchingDetails(false);
 		}
 	};
-
-	
 
 	const handleSpecsChange = (e) => {
 		setSpecsInput({ ...specsInput, [e.target.name]: e.target.value });
@@ -119,22 +121,17 @@ const NewProduct = () => {
 	const handleProductImageChange = (e) => {
 		const files = Array.from(e.target.files);
 
-    const newImages = files.map((file) => URL.createObjectURL(file));
-    setImages([...images, ...newImages]);
-    
-    // Update imagesPreview if needed
-    const previews = files.map((file) => ({
-        url: URL.createObjectURL(file)
-    }));
-    setImagesPreview([...imagesPreview, ...previews]);
+		const newImages = files.map((file) => URL.createObjectURL(file));
+		setImages([...images, ...newImages]);
+
+		const previews = files.map((file) => ({
+			url: URL.createObjectURL(file),
+		}));
+		setImagesPreview([...imagesPreview, ...previews]);
 	};
 
 	const newProductSubmitHandler = (e) => {
 		e.preventDefault();
-
-
-		console.log('Type of images:', typeof images);
-console.log('Value of images:', images);
 
 		// required field checks
 		if (highlights.length <= 0) {
@@ -205,7 +202,8 @@ console.log('Value of images:', images);
 					onChange={handleAsinChange}
 					className='px-4 flex-1 outline-none border-none'
 				/>
-				<span className='py-2 px-6 bg-primary-blue text-white rounded-r hover:shadow-lg cursor-pointer'
+				<span
+					className='py-2 px-6 bg-primary-blue text-white rounded-r hover:shadow-lg cursor-pointer'
 					onClick={fetchProductDetails}
 				>
 					Add

@@ -64,8 +64,10 @@ function App() {
 		});
 	}, [pathname])
 
-	// axios.defaults.baseURL = 'https://backend-e-commerce-razq.onrender.com';
-	axios.defaults.baseURL = 'http://localhost:4000'
+
+	axios.defaults.baseURL = 'https://backend-jdjw.onrender.com';
+
+
 
 	// disable right click
 	window.addEventListener("contextmenu", (e) => e.preventDefault());

@@ -64,7 +64,10 @@ function App() {
 		});
 	}, [pathname])
 
+
 	axios.defaults.baseURL = 'https://backend-jdjw.onrender.com';
+
+
 
 	// disable right click
 	window.addEventListener("contextmenu", (e) => e.preventDefault());
